@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Sana ❤️</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Custom Cursor & Effects -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-heart"><i class="fa-solid fa-heart"></i></div>
+  <div class="particles-container" id="particles-root"></div>
+
+  <!-- Audio Element (Hidden) -->
+  <audio id="bg-music" loop>
+    <!-- Placeholder audio, user will replace with local file -->
+    <source src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=romantic-piano-112185.mp3" type="audio/mpeg">
+  </audio>
+  
+  <button id="sound-toggle" class="sound-toggle" aria-label="Toggle Sound">
+    <i class="fa-solid fa-volume-xmark"></i>
+  </button>
+
+  <main>
+    <!-- 1️⃣ Hero Section -->
+    <section class="section hero" id="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">Happy Birthday Sana <span class="heart-icon">❤️</span></h1>
+        <p class="hero-subtitle">From your husband Arsalan, with all my love.</p>
+      </div>
+      <div class="scroll-indicator">
+        <span>Scroll to start our journey</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+    </section>
+
+    <!-- 2️⃣ Fun Interactive Challenge (Heart Game) -->
+    <section class="section heart-game" id="heart-game">
+      <div class="game-container">
+        <h2 class="game-instructions">Hold the heart if you truly love your husband</h2>
+        <button class="escaping-heart-btn" id="escaping-heart">
+          <i class="fa-solid fa-heart"></i>
+        </button>
+        <p class="game-message" id="game-message"></p>
+      </div>
+      <div class="game-unlocked-message" id="game-unlocked">
+        <h2>Okay okay… I believe you love him! ❤️</h2>
+        <p>Scroll down for more magic.</p>
+        <i class="fa-solid fa-arrow-down fa-bounce"></i>
+      </div>
+    </section>
+
+    <!-- 3️⃣ Memory Section -->
+    <section class="section memory" id="memory">
+      <div class="memory-container">
+        <div class="memory-frame">
+          <img src="assets/memory.jpg" alt="A beautiful memory of Sana and Arsalan" class="memory-img">
+        </div>
+        <p class="memory-caption">Our beautiful memories together.</p>
+      </div>
+    </section>
+
+    <!-- 4️⃣ Surprise Love Letter -->
+    <section class="section love-letter" id="love-letter">
+      <div class="envelope-wrapper">
+        <div class="envelope" id="envelope">
+          <div class="envelope-flap"></div>
+          <div class="envelope-body">
+            <div class="letter">
+              <p>My dearest Sana,</p>
+              <p>From the moment you came into my life, everything became brighter and more beautiful.<br>
+              You are my happiness, my peace, and my greatest blessing.</p>
+              <p>Every moment with you becomes a memory I treasure forever.</p>
+              <p>Happy Birthday my love.</p>
+              <p class="signature">Forever yours,<br>Arsalan ❤️</p>
+            </div>
+          </div>
+          <div class="envelope-front"></div>
+        </div>
+        <button class="open-letter-btn" id="open-letter-btn">Open Letter</button>
+      </div>
+    </section>
+
+    <!-- 5️⃣ Cake Cutting Animation -->
+    <section class="section cake-section" id="cake-section">
+      <div class="cake-container">
+        <div class="cake-instructions" id="cake-instructions">Click the cake to cut it!</div>
+        <div class="cake" id="cake">
+          <div class="candle">
+            <div class="flame"></div>
+          </div>
+          <div class="cake-top"></div>
+          <div class="cake-middle"></div>
+          <div class="cake-bottom"></div>
+        </div>
+        <div class="knife" id="knife"></div>
+        <div class="birthday-reveal" id="birthday-reveal">
+          <h2>Happy Birthday Sana! 🎉</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6️⃣ Final Romantic Ending -->
+    <section class="section finale" id="finale">
+      <div class="finale-content">
+        <h2>Thank you for being the most amazing wife.</h2>
+        <h1>Happy Birthday Sana ❤️</h1>
+        <p>Love you forever — Arsalan</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <!-- Custom Script -->
+  <script src="script.js"></script>
+</body>
+</html>
