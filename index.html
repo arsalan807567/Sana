@@ -10,21 +10,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
   
-  <!-- Font Awesome for Icons -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Custom Cursor & Effects -->
+  <!-- Custom Cursor -->
   <div class="cursor-dot"></div>
   <div class="cursor-heart"><i class="fa-solid fa-heart"></i></div>
-  <div class="particles-container" id="particles-root"></div>
 
-  <!-- Audio Element (Hidden) -->
+  <!-- Audio Element -->
   <audio id="bg-music" loop>
-    <!-- Placeholder audio, user will replace with local file -->
     <source src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=romantic-piano-112185.mp3" type="audio/mpeg">
   </audio>
   
@@ -47,14 +45,13 @@
       </div>
     </section>
 
-    <!-- 2️⃣ Fun Interactive Challenge (Heart Game) -->
+    <!-- 2️⃣ Heart Challenge -->
     <section class="section heart-game" id="heart-game">
       <div class="game-container">
         <h2 class="game-instructions">Hold the heart if you truly love your husband</h2>
         <button class="escaping-heart-btn" id="escaping-heart">
           <i class="fa-solid fa-heart"></i>
         </button>
-        <p class="game-message" id="game-message"></p>
       </div>
       <div class="game-unlocked-message" id="game-unlocked">
         <h2>Okay okay… I believe you love him! ❤️</h2>
@@ -77,27 +74,23 @@
     <section class="section love-letter" id="love-letter">
       <div class="envelope-wrapper">
         <div class="envelope" id="envelope">
-          <div class="envelope-flap"></div>
-          <div class="envelope-body">
-            <div class="letter">
-              <p>My dearest Sana,</p>
-              <p>From the moment you came into my life, everything became brighter and more beautiful.<br>
-              You are my happiness, my peace, and my greatest blessing.</p>
-              <p>Every moment with you becomes a memory I treasure forever.</p>
-              <p>Happy Birthday my love.</p>
-              <p class="signature">Forever yours,<br>Arsalan ❤️</p>
-            </div>
+          <div class="letter">
+            <p>My dearest Sana,</p>
+            <p>From the moment you came into my life, everything became brighter and more beautiful.<br>
+            You are my happiness, my peace, and my greatest blessing.</p>
+            <p>Every moment with you becomes a memory I treasure forever.</p>
+            <p>Happy Birthday my love.</p>
+            <p class="signature">Forever yours,<br>Arsalan ❤️</p>
           </div>
-          <div class="envelope-front"></div>
         </div>
-        <button class="open-letter-btn" id="open-letter-btn">Open Letter</button>
       </div>
+      <button class="open-letter-btn" id="open-letter-btn">Open Letter</button>
     </section>
 
-    <!-- 5️⃣ Cake Cutting Animation -->
+    <!-- 5️⃣ Cake Section -->
     <section class="section cake-section" id="cake-section">
       <div class="cake-container">
-        <div class="cake-instructions" id="cake-instructions">Click the cake to cut it!</div>
+        <div class="cake-instructions">Click the cake to blow out the candle!</div>
         <div class="cake" id="cake">
           <div class="candle">
             <div class="flame"></div>
@@ -106,14 +99,13 @@
           <div class="cake-middle"></div>
           <div class="cake-bottom"></div>
         </div>
-        <div class="knife" id="knife"></div>
         <div class="birthday-reveal" id="birthday-reveal">
           <h2>Happy Birthday Sana! 🎉</h2>
         </div>
       </div>
     </section>
 
-    <!-- 6️⃣ Final Romantic Ending -->
+    <!-- 6️⃣ Finale Section -->
     <section class="section finale" id="finale">
       <div class="finale-content">
         <h2>Thank you for being the most amazing wife.</h2>
@@ -123,14 +115,11 @@
     </section>
   </main>
 
-  <!-- GSAP & ScrollTrigger -->
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  
-  <!-- Canvas Confetti -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  
-  <!-- Custom Script -->
   <script src="script.js"></script>
 </body>
 </html>
