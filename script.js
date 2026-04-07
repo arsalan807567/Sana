@@ -119,6 +119,10 @@ function escapeHeart() {
 }
 
 heartBtn.addEventListener('mouseenter', escapeHeart);
+heartBtn.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  escapeHeart();
+});
 
 // ==========================================
 // Love Puzzle Game
@@ -150,13 +154,13 @@ function initPuzzle() {
 function checkPuzzle() {
   const currentOrder = Array.from(puzzleContainer.children).map(el => el.textContent);
   if (JSON.stringify(currentOrder) === JSON.stringify(secretMessage)) {
-    puzzleStatus.textContent = "Correct! You truly know my heart. ❤️";
+    puzzleStatus.innerHTML = "You truly are my heart's only desire. <br> Every piece of my life fits perfectly only with you. ❤️";
     confetti({ particleCount: 100, spread: 70, origin: { y: 0.8 } });
     setTimeout(() => {
       gsap.to(window, { scrollTo: "#cake-section", duration: 1.5 });
-    }, 2000);
+    }, 3500);
   } else {
-    puzzleStatus.textContent = "Keep trying, my love...";
+    puzzleStatus.textContent = "Rearrange the words to reveal my heart...";
   }
 }
 
@@ -169,6 +173,10 @@ const cake = document.getElementById('cake');
 const flame = document.querySelector('.flame');
 
 cake.addEventListener('click', () => {
+  // Magic sound effect on click
+  const magicSfx = new Audio('https://www.soundjay.com/misc/sounds/magic-chime-01.mp3');
+  magicSfx.play().catch(e => console.log("SFX failed"));
+
   gsap.to(flame, { opacity: 0, scale: 0, duration: 0.3 });
   
   // Confetti burst

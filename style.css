@@ -232,6 +232,12 @@ body {
   font-size: 0.9rem;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   z-index: 1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.envelope.is-open .letter {
+  opacity: 1;
 }
 
 .envelope.is-open .letter {
@@ -284,10 +290,25 @@ body {
 }
 
 .puzzle-status {
-  height: 30px;
+  height: auto;
+  min-height: 40px;
   font-family: var(--font-handwriting);
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: var(--gold);
+  margin-top: 1.5rem;
+  padding: 10px;
+  line-height: 1.2;
+}
+
+.escaping-heart-btn {
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 4rem;
+  cursor: pointer;
+  filter: drop-shadow(0 0 15px rgba(255, 75, 114, 0.5));
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
 }
 
 /* 6️⃣ CAKE SECTION */
@@ -299,6 +320,8 @@ body {
   position: relative;
   width: 200px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
 .cake-top, .cake-middle, .cake-bottom {
