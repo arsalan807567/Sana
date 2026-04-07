@@ -11,10 +11,7 @@ window.addEventListener('mousemove', (e) => {
   const posX = e.clientX;
   const posY = e.clientY;
 
-  // Dot moves instantly
   gsap.set(cursorDot, { x: posX, y: posY });
-
-  // Heart follows with a slight delay
   gsap.to(cursorHeart, {
     x: posX,
     y: posY,
@@ -24,25 +21,43 @@ window.addEventListener('mousemove', (e) => {
 });
 
 // Cursor interaction on buttons
-const hoverables = document.querySelectorAll('button, .cake, #escaping-heart');
-hoverables.forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    gsap.to(cursorDot, { scale: 3, backgroundColor: "var(--primary-color)", duration: 0.2 });
-    gsap.to(cursorHeart, { scale: 1.5, duration: 0.2 });
+const updateCursorHover = () => {
+  const hoverables = document.querySelectorAll('button, .cake, #escaping-heart, .puzzle-word');
+  hoverables.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      gsap.to(cursorDot, { scale: 3, backgroundColor: "var(--primary-color)", duration: 0.2 });
+      gsap.to(cursorHeart, { scale: 1.5, duration: 0.2 });
+    });
+    el.addEventListener('mouseleave', () => {
+      gsap.to(cursorDot, { scale: 1, backgroundColor: "var(--text-light)", duration: 0.2 });
+      gsap.to(cursorHeart, { scale: 1, duration: 0.2 });
+    });
   });
-  el.addEventListener('mouseleave', () => {
-    gsap.to(cursorDot, { scale: 1, backgroundColor: "var(--text-light)", duration: 0.2 });
-    gsap.to(cursorHeart, { scale: 1, duration: 0.2 });
-  });
-});
+};
+updateCursorHover();
 
 // ==========================================
-// Audio Control
+// Audio Control & Unmuted Start
 // ==========================================
 const bgMusic = document.getElementById('bg-music');
 const soundToggle = document.getElementById('sound-toggle');
 const soundIcon = soundToggle.querySelector('i');
+const startBtn = document.getElementById('start-journey');
 let isPlaying = false;
+
+// Function to start music (unmuted)
+const startExperience = () => {
+  bgMusic.play().then(() => {
+    isPlaying = true;
+    soundIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+    // Scroll to the next section
+    gsap.to(window, { scrollTo: "#heart-game", duration: 1.5, ease: "power2.inOut" });
+  }).catch(error => {
+    console.log("Audio play failed:", error);
+  });
+};
+
+startBtn.addEventListener('click', startExperience);
 
 soundToggle.addEventListener('click', () => {
   if (isPlaying) {
@@ -61,27 +76,11 @@ soundToggle.addEventListener('click', () => {
 window.addEventListener('load', () => {
   const tl = gsap.timeline();
 
-  tl.to('.hero-title', {
-    opacity: 1,
-    y: 0,
-    duration: 1.5,
-    ease: "power3.out"
-  })
-  .to('.hero-subtitle', {
-    opacity: 1,
-    y: 0,
-    duration: 1,
-    ease: "power2.out"
-  }, "-=0.8")
-  .from('.scroll-indicator', {
-    opacity: 0,
-    y: -20,
-    duration: 1,
-    repeat: -1,
-    yoyo: true
-  });
+  tl.to('.hero-title', { opacity: 1, y: 0, duration: 1.5, ease: "power3.out" })
+    .to('.hero-subtitle', { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "-=0.8")
+    .to('.start-btn', { opacity: 1, y: 0, duration: 1, ease: "back.out(1.7)" }, "-=0.5")
+    .from('.scroll-indicator', { opacity: 0, y: -20, duration: 1, repeat: -1, yoyo: true });
 
-  // Parallax background
   gsap.to('.hero-bg', {
     yPercent: 20,
     ease: "none",
@@ -111,12 +110,7 @@ function escapeHeart() {
     const x = (Math.random() - 0.5) * (rect.width - 100);
     const y = (Math.random() - 0.5) * (rect.height - 100);
 
-    gsap.to(heartBtn, {
-      x: x,
-      y: y,
-      duration: 0.2,
-      ease: "power2.out"
-    });
+    gsap.to(heartBtn, { x: x, y: y, duration: 0.2, ease: "power2.out" });
   } else {
     gsap.to(heartBtn, { x: 0, y: 0, scale: 1.5, duration: 0.5 });
     gameUnlocked.style.display = "block";
@@ -127,19 +121,46 @@ function escapeHeart() {
 heartBtn.addEventListener('mouseenter', escapeHeart);
 
 // ==========================================
-// Memory Section Animation
+// Love Puzzle Game
 // ==========================================
-gsap.from('.memory-frame', {
-  scrollTrigger: {
-    trigger: ".memory",
-    start: "top 60%",
-  },
-  scale: 0.8,
-  opacity: 0,
-  rotation: -10,
-  duration: 1.5,
-  ease: "back.out(1.7)"
-});
+const puzzleContainer = document.getElementById('puzzle-container');
+const puzzleStatus = document.getElementById('puzzle-status');
+const secretMessage = ["You", "Are", "My", "Everything", "Sana"];
+let shuffledMessage = [...secretMessage].sort(() => Math.random() - 0.5);
+
+function initPuzzle() {
+  puzzleContainer.innerHTML = '';
+  shuffledMessage.forEach((word, index) => {
+    const wordEl = document.createElement('div');
+    wordEl.className = 'puzzle-word';
+    wordEl.textContent = word;
+    wordEl.setAttribute('data-word', word);
+    puzzleContainer.appendChild(wordEl);
+  });
+
+  new Sortable(puzzleContainer, {
+    animation: 150,
+    ghostClass: 'sortable-ghost',
+    onEnd: checkPuzzle
+  });
+  
+  updateCursorHover();
+}
+
+function checkPuzzle() {
+  const currentOrder = Array.from(puzzleContainer.children).map(el => el.textContent);
+  if (JSON.stringify(currentOrder) === JSON.stringify(secretMessage)) {
+    puzzleStatus.textContent = "Correct! You truly know my heart. ❤️";
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.8 } });
+    setTimeout(() => {
+      gsap.to(window, { scrollTo: "#cake-section", duration: 1.5 });
+    }, 2000);
+  } else {
+    puzzleStatus.textContent = "Keep trying, my love...";
+  }
+}
+
+initPuzzle();
 
 // ==========================================
 // Cake Cutting Logic
@@ -149,10 +170,13 @@ const flame = document.querySelector('.flame');
 
 cake.addEventListener('click', () => {
   gsap.to(flame, { opacity: 0, scale: 0, duration: 0.3 });
+  
+  // Confetti burst
   confetti({
-    particleCount: 150,
-    spread: 70,
-    origin: { y: 0.6 }
+    particleCount: 200,
+    spread: 100,
+    origin: { y: 0.6 },
+    colors: ['#ff4b72', '#f4d03f', '#ffffff']
   });
   
   gsap.to('.birthday-reveal', {
@@ -161,18 +185,32 @@ cake.addEventListener('click', () => {
     duration: 1,
     ease: "back.out(1.7)"
   });
+
+  setTimeout(() => {
+    gsap.to(window, { scrollTo: "#finale", duration: 2 });
+  }, 3000);
 });
 
 // ==========================================
-// Finale Animation
+// Love Letter Logic
 // ==========================================
+const openLetterBtn = document.getElementById('open-letter-btn');
+const envelope = document.getElementById('envelope');
+
+openLetterBtn.addEventListener('click', () => {
+  envelope.classList.toggle('is-open');
+  openLetterBtn.textContent = envelope.classList.contains('is-open') ? "Close Letter" : "Open Letter";
+});
+
+// ==========================================
+// Scroll Animations
+// ==========================================
+gsap.from('.memory-frame', {
+  scrollTrigger: { trigger: ".memory", start: "top 60%" },
+  scale: 0.8, opacity: 0, rotation: -10, duration: 1.5, ease: "back.out(1.7)"
+});
+
 gsap.from('.finale-content h1', {
-  scrollTrigger: {
-    trigger: ".finale",
-    start: "top 70%",
-  },
-  scale: 0.5,
-  opacity: 0,
-  duration: 1.5,
-  ease: "elastic.out(1, 0.3)"
+  scrollTrigger: { trigger: ".finale", start: "top 70%" },
+  scale: 0.5, opacity: 0, duration: 1.5, ease: "elastic.out(1, 0.3)"
 });

@@ -21,9 +21,9 @@
   <div class="cursor-dot"></div>
   <div class="cursor-heart"><i class="fa-solid fa-heart"></i></div>
 
-  <!-- Audio Element -->
+  <!-- Audio Elements -->
   <audio id="bg-music" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=romantic-piano-112185.mp3" type="audio/mpeg">
+    <source src="assets/birthday-music.mp3" type="audio/mpeg">
   </audio>
   
   <button id="sound-toggle" class="sound-toggle" aria-label="Toggle Sound">
@@ -38,9 +38,10 @@
       <div class="hero-content">
         <h1 class="hero-title">Happy Birthday Sana <span class="heart-icon">❤️</span></h1>
         <p class="hero-subtitle">From your husband Arsalan, with all my love.</p>
+        <button id="start-journey" class="start-btn">Start Our Journey</button>
       </div>
       <div class="scroll-indicator">
-        <span>Scroll to start our journey</span>
+        <span>Scroll to start</span>
         <i class="fa-solid fa-chevron-down"></i>
       </div>
     </section>
@@ -87,7 +88,19 @@
       <button class="open-letter-btn" id="open-letter-btn">Open Letter</button>
     </section>
 
-    <!-- 5️⃣ Cake Section -->
+    <!-- 5️⃣ Romantic Game: Love Puzzle -->
+    <section class="section romantic-game" id="romantic-game">
+      <div class="game-card">
+        <h2>A Little Love Challenge ❤️</h2>
+        <p>Rearrange the words to reveal a secret message!</p>
+        <div id="puzzle-container" class="puzzle-container">
+          <!-- Words will be injected here -->
+        </div>
+        <div id="puzzle-status" class="puzzle-status"></div>
+      </div>
+    </section>
+
+    <!-- 6️⃣ Cake Section -->
     <section class="section cake-section" id="cake-section">
       <div class="cake-container">
         <div class="cake-instructions">Click the cake to blow out the candle!</div>
@@ -105,7 +118,7 @@
       </div>
     </section>
 
-    <!-- 6️⃣ Finale Section -->
+    <!-- 7️⃣ Finale Section -->
     <section class="section finale" id="finale">
       <div class="finale-content">
         <h2>Thank you for being the most amazing wife.</h2>
@@ -120,7 +133,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
-<!-- Triggering new deployment to ensure latest professional redesign is live -->

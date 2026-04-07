@@ -66,9 +66,9 @@ body {
   overflow: hidden;
 }
 
-/* 1️⃣ HERO SECTION - FIXED BACKGROUND */
+/* 1️⃣ HERO SECTION */
 .hero {
-  background: #000; /* Fallback */
+  background: #000;
 }
 
 .hero-bg {
@@ -82,7 +82,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
-  transform: scale(1.1); /* For parallax effect */
+  transform: scale(1.1);
 }
 
 .hero-overlay {
@@ -114,7 +114,26 @@ body {
   font-family: var(--font-handwriting);
   font-size: clamp(1.8rem, 4vw, 2.8rem);
   color: var(--soft-pink);
-  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.start-btn {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: 0 10px 20px rgba(255, 75, 114, 0.3);
+}
+
+.start-btn:hover {
+  transform: translateY(-5px);
+  background: var(--primary-dark);
 }
 
 .scroll-indicator {
@@ -158,19 +177,13 @@ body {
   font-size: 4rem;
   cursor: pointer;
   filter: drop-shadow(0 0 15px rgba(255, 75, 114, 0.5));
-  transition: transform 0.2s ease;
 }
 
 .game-unlocked-message {
   display: none;
-  animation: fadeIn 1s ease forwards;
 }
 
 /* 3️⃣ MEMORY SECTION */
-.memory {
-  background: var(--bg-dark);
-}
-
 .memory-frame {
   max-width: 700px;
   padding: 20px;
@@ -193,10 +206,6 @@ body {
 }
 
 /* 4️⃣ LOVE LETTER */
-.love-letter {
-  background: #1a0f2e;
-}
-
 .envelope-wrapper {
   perspective: 1000px;
   margin-bottom: 3rem;
@@ -211,10 +220,6 @@ body {
   transition: transform 0.6s ease;
 }
 
-.envelope.is-open {
-  transform: rotateX(20deg);
-}
-
 .letter {
   position: absolute;
   top: 10px;
@@ -226,7 +231,6 @@ body {
   color: #333;
   font-size: 0.9rem;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: transform 0.6s ease;
   z-index: 1;
 }
 
@@ -242,21 +246,53 @@ body {
   border-radius: 50px;
   font-weight: 600;
   cursor: pointer;
-  transition: var(--transition);
 }
 
-/* 5️⃣ CAKE SECTION */
+/* 5️⃣ ROMANTIC GAME: LOVE PUZZLE */
+.romantic-game {
+  background: #1a0f2e;
+}
+
+.game-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 600px;
+  width: 90%;
+}
+
+.puzzle-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.puzzle-word {
+  padding: 10px 20px;
+  background: var(--primary-color);
+  border-radius: 10px;
+  cursor: grab;
+  font-weight: 600;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.puzzle-word:active {
+  cursor: grabbing;
+}
+
+.puzzle-status {
+  height: 30px;
+  font-family: var(--font-handwriting);
+  font-size: 1.5rem;
+  color: var(--gold);
+}
+
+/* 6️⃣ CAKE SECTION */
 .cake-section {
   background: radial-gradient(circle at center, #2a1b3d 0%, #0f0c16 100%);
-}
-
-.cake-container {
-  position: relative;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .cake {
@@ -296,14 +332,20 @@ body {
   animation: flicker 0.1s infinite alternate;
 }
 
-/* 6️⃣ FINALE */
+.birthday-reveal {
+  opacity: 0;
+  transform: scale(0.5);
+  margin-top: 2rem;
+}
+
+/* 7️⃣ FINALE */
 .finale {
   background: #000;
 }
 
 .finale-content h1 {
   font-family: var(--font-heading);
-  font-size: 5rem;
+  font-size: clamp(3rem, 8vw, 5rem);
   color: var(--primary-color);
 }
 
@@ -326,11 +368,6 @@ body {
 @keyframes flicker {
   from { transform: scale(1); opacity: 1; }
   to { transform: scale(1.1); opacity: 0.8; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Mobile Adjustments */
