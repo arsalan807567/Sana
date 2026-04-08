@@ -187,13 +187,9 @@ const cake = document.getElementById('cake');
 const flame = document.querySelector('.flame');
 
 cake.addEventListener('click', () => {
-  // Magic sound effect on click - using a more reliable URL
-  const magicSfx = new Audio('https://www.soundjay.com/buttons/sounds/button-20.mp3');
+  // Magic sound effect on click - using local asset
+  const magicSfx = new Audio('assets/magic-chime.mp3');
   magicSfx.play().catch(e => console.log("SFX failed"));
-  
-  // Secondary chime sound
-  const chimeSfx = new Audio('https://www.soundjay.com/misc/sounds/bell-ringing-01.mp3');
-  setTimeout(() => chimeSfx.play().catch(e => {}), 200);
 
   gsap.to(flame, { opacity: 0, scale: 0, duration: 0.3 });
   
@@ -227,8 +223,8 @@ openLetterBtn.addEventListener('click', () => {
   envelope.classList.toggle('is-open');
   if (envelope.classList.contains('is-open')) {
     openLetterBtn.textContent = "Close Letter";
-    // Play a paper sound if possible
-    new Audio('https://www.soundjay.com/misc/sounds/paper-flip-1.mp3').play().catch(e => {});
+    // Play a paper sound - using local asset
+    new Audio('assets/paper-flip.mp3').play().catch(e => {});
   } else {
     openLetterBtn.textContent = "Open Love Letter";
   }
