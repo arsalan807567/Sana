@@ -57,6 +57,20 @@ const startExperience = () => {
   });
 };
 
+// Try to autoplay on load
+window.addEventListener('load', () => {
+  bgMusic.play().then(() => {
+    isPlaying = true;
+    soundIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+  }).catch(() => {
+    console.log("Autoplay blocked, waiting for interaction");
+    // If blocked, any click on body will start it
+    document.body.addEventListener('click', () => {
+      if (!isPlaying) startExperience();
+    }, { once: true });
+  });
+});
+
 startBtn.addEventListener('click', startExperience);
 
 soundToggle.addEventListener('click', () => {
@@ -173,9 +187,13 @@ const cake = document.getElementById('cake');
 const flame = document.querySelector('.flame');
 
 cake.addEventListener('click', () => {
-  // Magic sound effect on click
-  const magicSfx = new Audio('https://www.soundjay.com/misc/sounds/magic-chime-01.mp3');
+  // Magic sound effect on click - using a more reliable URL
+  const magicSfx = new Audio('https://www.soundjay.com/buttons/sounds/button-20.mp3');
   magicSfx.play().catch(e => console.log("SFX failed"));
+  
+  // Secondary chime sound
+  const chimeSfx = new Audio('https://www.soundjay.com/misc/sounds/bell-ringing-01.mp3');
+  setTimeout(() => chimeSfx.play().catch(e => {}), 200);
 
   gsap.to(flame, { opacity: 0, scale: 0, duration: 0.3 });
   
@@ -207,7 +225,13 @@ const envelope = document.getElementById('envelope');
 
 openLetterBtn.addEventListener('click', () => {
   envelope.classList.toggle('is-open');
-  openLetterBtn.textContent = envelope.classList.contains('is-open') ? "Close Letter" : "Open Letter";
+  if (envelope.classList.contains('is-open')) {
+    openLetterBtn.textContent = "Close Letter";
+    // Play a paper sound if possible
+    new Audio('https://www.soundjay.com/misc/sounds/paper-flip-1.mp3').play().catch(e => {});
+  } else {
+    openLetterBtn.textContent = "Open Love Letter";
+  }
 });
 
 // ==========================================

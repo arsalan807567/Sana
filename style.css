@@ -207,17 +207,42 @@ body {
 
 /* 4️⃣ LOVE LETTER */
 .envelope-wrapper {
-  perspective: 1000px;
+  perspective: 1500px;
   margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .envelope {
-  width: 300px;
-  height: 200px;
-  background: #fff;
+  width: 320px;
+  height: 220px;
+  background: #f5f5f5;
   position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.6s ease;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-top: 110px solid #e0e0e0;
+  z-index: 3;
+  transition: transform 0.8s ease, z-index 0.8s ease;
+  transform-origin: top;
+}
+
+.envelope.is-open::before {
+  transform: rotateX(180deg);
+  z-index: 1;
 }
 
 .letter {
@@ -226,32 +251,66 @@ body {
   left: 10px;
   right: 10px;
   bottom: 10px;
-  background: #fdfdfd;
-  padding: 20px;
+  background: #fff;
+  padding: 25px;
   color: #333;
-  font-size: 0.9rem;
+  font-family: var(--font-handwriting);
+  font-size: 1.2rem;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  z-index: 1;
+  z-index: 2;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  visibility: hidden;
 }
 
 .envelope.is-open .letter {
   opacity: 1;
+  visibility: visible;
+  transform: translateY(-150px) scale(1.1);
+  z-index: 4;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-.envelope.is-open .letter {
-  transform: translateY(-100px);
+.letter p {
+  margin-bottom: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.envelope.is-open .letter p {
+  animation: floatText 1s forwards;
+}
+
+.envelope.is-open .letter p:nth-child(1) { animation-delay: 0.3s; }
+.envelope.is-open .letter p:nth-child(2) { animation-delay: 0.6s; }
+.envelope.is-open .letter p:nth-child(3) { animation-delay: 0.9s; }
+.envelope.is-open .letter p:nth-child(4) { animation-delay: 1.2s; }
+.envelope.is-open .letter p:nth-child(5) { animation-delay: 1.5s; }
+
+@keyframes floatText {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .open-letter-btn {
-  padding: 12px 30px;
+  padding: 15px 40px;
   background: var(--primary-color);
   border: none;
   color: #fff;
   border-radius: 50px;
   font-weight: 600;
+  font-size: 1.1rem;
   cursor: pointer;
+  box-shadow: 0 10px 20px rgba(255, 75, 114, 0.3);
+  transition: var(--transition);
+}
+
+.open-letter-btn:hover {
+  transform: translateY(-3px);
+  background: var(--primary-dark);
 }
 
 /* 5️⃣ ROMANTIC GAME: LOVE PUZZLE */
