@@ -212,6 +212,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 350px;
 }
 
 .envelope {
@@ -373,6 +374,17 @@ body {
 /* 6️⃣ CAKE SECTION */
 .cake-section {
   background: radial-gradient(circle at center, #2a1b3d 0%, #0f0c16 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cake-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .cake {
@@ -381,6 +393,7 @@ body {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   outline: none;
+  margin: 0 auto;
 }
 
 .cake-top, .cake-middle, .cake-bottom {

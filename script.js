@@ -57,18 +57,26 @@ const startExperience = () => {
   });
 };
 
+// Force music to be on by default as soon as possible
+const forceMusic = () => {
+  if (!isPlaying) {
+    bgMusic.play().then(() => {
+      isPlaying = true;
+      soundIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+      bgMusic.muted = false; // Ensure it's unmuted
+    }).catch(e => console.log("Music trigger waiting for more interaction"));
+  }
+};
+
 // Try to autoplay on load
 window.addEventListener('load', () => {
-  bgMusic.play().then(() => {
-    isPlaying = true;
-    soundIcon.classList.replace('fa-volume-xmark', 'fa-volume-high');
-  }).catch(() => {
-    console.log("Autoplay blocked, waiting for interaction");
-    // If blocked, any click on body will start it
-    document.body.addEventListener('click', () => {
-      if (!isPlaying) startExperience();
-    }, { once: true });
-  });
+  bgMusic.muted = false;
+  forceMusic();
+});
+
+// Any interaction will force the music on
+['click', 'touchstart', 'scroll', 'mousemove'].forEach(event => {
+  document.body.addEventListener(event, forceMusic, { once: true });
 });
 
 startBtn.addEventListener('click', startExperience);
@@ -219,7 +227,8 @@ cake.addEventListener('click', () => {
 const openLetterBtn = document.getElementById('open-letter-btn');
 const envelope = document.getElementById('envelope');
 
-openLetterBtn.addEventListener('click', () => {
+openLetterBtn.addEventListener('click', (e) => {
+  e.preventDefault(); // Prevent any default scroll behavior
   envelope.classList.toggle('is-open');
   if (envelope.classList.contains('is-open')) {
     openLetterBtn.textContent = "Close Letter";
